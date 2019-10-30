@@ -9,7 +9,7 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description='train', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
-    parser.add_argument('--input_file', default='data/embedding.tsv')
+    parser.add_argument('--input_file', default='../data/embedding.tsv')
     parser.add_argument('--n_clusters', default=5, type=int)
     parser.add_argument('--input_dim', type=int)
 
@@ -18,7 +18,7 @@ if __name__ == "__main__":
     parser.add_argument('--iter_max', default=1000, type=int)
     parser.add_argument('--tol', default=0.001, type=float)
 
-    parser.add_argument('--output_file', default='data/cluster.csv')
+    parser.add_argument('--output_file', default='../data/cluster.csv')
 
     args = parser.parse_args()
 
