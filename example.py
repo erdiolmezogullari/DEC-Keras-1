@@ -1,7 +1,7 @@
 from keras_dec import DeepEmbeddingClustering
 from keras.datasets import mnist
 import numpy as np
-
+import pandas as pd
 
 def get_mnist():
     np.random.seed(1234) # set seed for deterministic ordering
@@ -18,6 +18,16 @@ def get_mnist():
 
 X, Y  = get_mnist()
 
-c = DeepEmbeddingClustering(n_clusters=10, input_dim=784)
+c = DeepEmbeddingClustering(n_clusters=len(np.unique(Y)), input_dim=784)
 c.initialize(X, finetune_iters=100000, layerwise_pretrain_iters=50000)
-c.cluster(X, y=Y)
+pred_y = c.cluster(X, y=None, iter_max=1)
+assert len(pred_y) == len(Y)
+
+d = {
+    'pred_y' : pred_y,
+    'actual_y' : Y
+}
+df = pd.DataFrame(d)
+df.to_csv('data/example_cluster.csv', index=False)
+
+print(pred_y)
